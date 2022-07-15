@@ -8,7 +8,7 @@ class TaskList {
 
     fun printTasks() {
         for (task in this.taskList) {
-            print(task)
+            println(task)
         }
     }
 
