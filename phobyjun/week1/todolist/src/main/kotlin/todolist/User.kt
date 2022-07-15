@@ -1,8 +1,7 @@
 package todolist
 
-class User(name: String, password: String) {
+class User(val name: String, val password: String) {
     private var taskLists = mutableMapOf<String, TaskList>()
-
     private var selectedTaskLists: String = ""
 
     fun printTodoList() {
@@ -18,6 +17,10 @@ class User(name: String, password: String) {
     }
 
     fun selectTaskList() {}// TODO: 2022/07/15
+
+    fun checkPassword(password: String): Boolean {
+        return password == this.password
+    }
 }
 
 fun newUser(name: String, password: String): User {
