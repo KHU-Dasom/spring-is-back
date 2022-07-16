@@ -2,14 +2,23 @@ package todolist
 
 class User(val name: String, private val password: String) {
     private var taskLists = mutableMapOf<String, TaskList>()
-    private var selectedTaskList: String = ""
+    private var selectedTaskList: String? = null
 
     fun printTaskLists() {
-        taskLists.forEach { println(it) }
+        taskLists.forEach { print("${it.key}\t") }
+        println()
     }
 
     fun printCurrentTaskList() {
-        taskLists[selectedTaskList]?.printTasks()
+        println(
+            "현재 선택된 TodoList: ${
+                if (selectedTaskList == null) {
+                    "없음"
+                } else {
+                    selectedTaskList
+                }
+            }"
+        )
     }
 
     fun newTaskList(taskListName: String) {

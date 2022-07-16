@@ -7,8 +7,10 @@ class TaskList {
     private var taskList = mutableListOf<Task>()
 
     fun printTasks() {
-        for (task in this.taskList) {
-            println(task)
+        println("=============== 할 일 목록 ===============")
+        println("번호\t내용\t기한\t상태")
+        for ((idx, task) in taskList.withIndex()) {
+            println("$idx\t${task.text}\t${task.dueDate}\t${task.status}")
         }
     }
 
