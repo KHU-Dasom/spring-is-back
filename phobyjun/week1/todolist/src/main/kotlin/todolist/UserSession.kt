@@ -2,11 +2,10 @@ package todolist
 
 object UserSession {
     private var users = mutableMapOf<String, User>()
-    private var currentUser: User? = null
+    var currentUser: User? = null
 
     fun newUser(name: String, password: String) {
-        val user = User(name, password)
-        users[name] = user
+        users[name] = User(name, password)
     }
 
     fun loginUser(name: String, password: String) {
@@ -25,6 +24,10 @@ object UserSession {
             }
             else -> throw LoginFailedException("No Signed-Up User.")
         }
+    }
+
+    fun logout() {
+        currentUser = null
     }
 }
 
