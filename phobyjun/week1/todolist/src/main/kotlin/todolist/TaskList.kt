@@ -23,6 +23,7 @@ class TaskList {
                         "${task.status}"
             )
         }
+        println()
     }
 
     fun newTask(text: String) {
@@ -45,6 +46,14 @@ class TaskList {
             "DOING" -> TaskStatus.DOING
             "DONE" -> TaskStatus.DONE
             else -> TaskStatus.READY
+        }
+    }
+
+    fun sortTaskList(base: String) {
+        when (base) {
+            "TASK" -> taskList.sortBy { it.text }
+            "DUE" -> taskList.sortBy { it.dueDate }
+            "STATUS" -> taskList.sortBy { it.status }
         }
     }
 }
