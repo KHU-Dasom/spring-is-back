@@ -1,13 +1,14 @@
 package todolist
 
 import todolist.todo.Task
+import todolist.todo.TaskStatus
 import java.time.LocalDate
 
 class TaskList {
     private var taskList = mutableListOf<Task>()
 
     fun printTasks() {
-        println("=============== 할 일 목록 ===============")
+        println("================== 할 일 목록 ==================")
         println(
             "No.".padEnd(4) +
                     "Task".padEnd(20) +
@@ -32,5 +33,18 @@ class TaskList {
     fun newTaskWithDueDate(text: String, dueDate: String) {
         val taskWithDate: (String, String) -> Task = { t, d -> Task(t, LocalDate.parse(d)) }
         this.taskList.add(taskWithDate(text, dueDate))
+    }
+
+    fun deleteTask(idx: Int) {
+        taskList.removeAt(idx)
+    }
+
+    fun changeStatus(idx: Int, status: String) {
+        taskList[idx].status = when (status) {
+            "READY" -> TaskStatus.READY
+            "DOING" -> TaskStatus.DOING
+            "DONE" -> TaskStatus.DONE
+            else -> TaskStatus.READY
+        }
     }
 }

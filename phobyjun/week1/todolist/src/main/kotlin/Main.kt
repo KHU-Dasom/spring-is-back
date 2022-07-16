@@ -55,11 +55,21 @@ fun main() {
                 currentUser?.printCurrentTaskList()
 
                 currentTaskList.printTasks()
-                println("1. Task 생성\t2. 일정 Task 생성\t3. TodoList 변경")
+                println("1. Task 생성\t2. 일정 Task 생성\t3. Task 삭제\t4. TodoList 변경\t5. 로그아웃")
+                println("6. Task 상태 변경\t7. Task 정렬 변경")
                 when (input().toInt()) {
                     1 -> currentTaskList.newTask(input("할 일: "))
                     2 -> currentTaskList.newTaskWithDueDate(input("할 일: "), input("기한: "))
-                    3 -> currentTaskList = null
+                    3 -> currentTaskList.deleteTask(input("번호: ").toInt() - 1)
+                    4 -> currentTaskList = null
+                    5 -> {
+                        currentUser = null
+                        currentTaskList = null
+                    }
+                    6 -> {
+                        println("상태 변경(e.g. READY | DOING | DONE)")
+                        currentTaskList.changeStatus(input("번호: ").toInt() - 1, input("상태: "))
+                    }
                 }
             }
         }
