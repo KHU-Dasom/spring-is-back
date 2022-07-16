@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    implementation("io.kotest:kotest-runner-junit5-jvm:4.6.0")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    implementation("io.kotest:kotest-runner-junit5-jvm:5.3.1")
     testImplementation(kotlin("test"))
 }
 
@@ -24,6 +24,20 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "MainKt"
+    }
+
+    from(sourceSets.main.get().output)
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 application {
