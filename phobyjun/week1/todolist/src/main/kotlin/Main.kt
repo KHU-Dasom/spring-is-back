@@ -38,12 +38,13 @@ fun main() {
                 print("TodoList를 선택해주세요.\nTodoList 목록 | ")
                 currentUser!!.printTaskLists()
 
-                println("1. TodoList 생성\t2. TodoList 선택\t3. 로그아웃")
+                println("1. TodoList 생성\t2.TodoList 삭제\t3. TodoList 선택\t4. 로그아웃")
                 when (input().toInt()) {
                     1 -> currentUser.newTaskList(input("TodoList 이름: "))
-                    2 -> currentTaskList = currentUser
+                    2 -> currentUser.deleteTaskList(input("TodoList 이름: "))
+                    3 -> currentTaskList = currentUser
                         .selectTaskList(input("선택할 TodoList 이름: "))
-                    3 -> {
+                    4 -> {
                         currentUser = null
                         currentTaskList = null
                     }
