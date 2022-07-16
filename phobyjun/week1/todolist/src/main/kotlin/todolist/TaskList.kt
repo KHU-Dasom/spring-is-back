@@ -8,9 +8,19 @@ class TaskList {
 
     fun printTasks() {
         println("=============== 할 일 목록 ===============")
-        println("번호\t내용\t기한\t상태")
+        println(
+            "No.".padEnd(4) +
+                    "Task".padEnd(20) +
+                    "Due".padEnd(15) +
+                    "Status"
+        )
         for ((idx, task) in taskList.withIndex()) {
-            println("$idx\t${task.text}\t${task.dueDate}\t${task.status}")
+            println(
+                "${idx + 1}".padEnd(4) +
+                        task.text.padEnd(20) +
+                        "${task.dueDate}".padEnd(15) +
+                        "${task.status}"
+            )
         }
     }
 

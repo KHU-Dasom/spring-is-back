@@ -47,6 +47,7 @@ fun main() {
                     4 -> {
                         currentUser = null
                         currentTaskList = null
+                        break
                     }
                 }
             }

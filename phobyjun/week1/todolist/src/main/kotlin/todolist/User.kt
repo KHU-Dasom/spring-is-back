@@ -26,7 +26,7 @@ class User(val name: String, private val password: String) {
     }
 
     fun deleteTaskList(taskListName: String) {
-        taskLists.remove("taskListName")
+        taskLists.remove(taskListName)
     }
 
     fun selectTaskList(name: String): TaskList? {
