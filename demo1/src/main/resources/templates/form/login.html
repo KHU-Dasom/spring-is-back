@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+</head>
+<body>
+  <form th:action="@{/login}" th:method="POST">
+
+    <input type="text" th:name="username">   <!-- th:name은 request parameter ?? -->
+    <br>
+    <input type="password" th:name="password">  <!-- password는 field로 하면 전송이 안됨-->
+    <br>
+    <input type="submit" value="로그인"></input>
+  </form>
+</body>
+</html>

@@ -16,6 +16,7 @@ class Users(
     @GeneratedValue//(strategy = GenerationType.AUTO)
     var id: Long?=null) //@Id : prime key, @GeneratedValue : 자동생성)
 
+
 @Entity
 class Todo(
     val userId : String,
