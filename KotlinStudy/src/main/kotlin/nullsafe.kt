@@ -2,15 +2,11 @@ data class Text(
     var text: String = "hello"
 )
 
+fun getName(str: String?): String{
+    val name = str ?: "Unknown"
+    return name
+}
 fun main(args: Array<String>) {
-    var message: Text? = Text("Hello Hello")
-    var nullMessage: Text? = null
-
-    message?.let{
-        println("message : ${it.text}")
-    }
-
-    nullMessage?.let{
-        println("message 출력 안됨")
-    }
+    println(getName(null))
+    println(getName("non-null"))
 }
