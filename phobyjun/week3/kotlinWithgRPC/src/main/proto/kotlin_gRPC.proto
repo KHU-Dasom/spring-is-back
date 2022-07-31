@@ -1,0 +1,16 @@
+syntax = "proto3";
+package kotlin_gRPC;
+
+service PersonService {
+  rpc GetPersonWithId (PersonId) returns (Person);
+}
+
+message Person {
+  PersonId personId = 1;
+  string name = 2;
+  int32 age = 3;
+}
+
+message PersonId {
+  int32 id = 1;
+}
