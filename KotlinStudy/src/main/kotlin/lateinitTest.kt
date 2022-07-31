@@ -15,6 +15,6 @@ class MyTest {
 }
 fun main(){
     var test : MyTest = MyTest()
-    //test.setUp()
-    //test.testAction()
+    test.setUp()
+    test.testAction()
 }

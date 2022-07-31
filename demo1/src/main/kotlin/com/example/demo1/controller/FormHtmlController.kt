@@ -4,6 +4,7 @@ import com.example.demo1.domain.Users
 import com.example.demo1.repositories.UsersRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.PathVariable
@@ -44,6 +45,8 @@ class FormHtmlController {
         }
 
         users?.let {
+            val bcrypt = BCryptPasswordEncoder(11)
+            it.pwd = bcrypt.encode(it.pwd)
             //println(it)   //it으로 할 수도 있고 user로 할 수도 있음
             usersRepository.save(it)
         }
