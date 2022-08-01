@@ -7,7 +7,7 @@ import kotlin_gRPC.PersonServiceGrpcKt
 fun main() {
     val personService = PersonService()
     val server = ServerBuilder
-        .forPort(8080)
+        .forPort(15001)
         .addService(personService)
         .build()
 
