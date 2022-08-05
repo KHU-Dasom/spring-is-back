@@ -26,15 +26,15 @@ class WebSecurityConfig(
         http.httpBasic().disable()
             .csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authorizeRequests()
+
+        http.authorizeRequests()
             .antMatchers("/api/v1/**").authenticated()
             .antMatchers("/account/**").permitAll()
-            .and()
-            .addFilterBefore(
-                JwtAuthenticationFilter(jwtTokenProvider),
-                UsernamePasswordAuthenticationFilter::class.java
-            )
+
+        http.addFilterBefore(
+            JwtAuthenticationFilter(jwtTokenProvider),
+            UsernamePasswordAuthenticationFilter::class.java
+        )
 
         return http.build()
     }

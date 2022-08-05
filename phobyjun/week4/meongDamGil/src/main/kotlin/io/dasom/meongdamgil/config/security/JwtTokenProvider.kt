@@ -1,7 +1,6 @@
 package io.dasom.meongdamgil.config.security
 
 import io.dasom.meongdamgil.service.account.AccountDetailsService
-import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
@@ -20,8 +19,7 @@ class JwtTokenProvider(
     @Value("\${security.jwt.token.secret-key}")
     val secretKey: String = ""
 
-    @Value("\${security.jwt.token.validationTime")
-    val validationTime: Long = 0L
+    val validationTime: Long = 3600000
 
     fun createJsonWebToken(email: String): String? {
         val claims = Jwts.claims().setSubject(email)
@@ -37,14 +35,14 @@ class JwtTokenProvider(
             .compact()
     }
 
-    fun getAuthentication(token: String): Authentication {
+    fun getAuthentication(token: String?): Authentication {
         val accountDetails = accountDetailsService.loadUserByUsername(getEmail(token))
         return UsernamePasswordAuthenticationToken(
             accountDetails, "", accountDetails.authorities
         )
     }
 
-    fun getEmail(token: String): String? {
+    fun getEmail(token: String?): String? {
         return Jwts.parserBuilder()
             .setSigningKey(getSigningKey())
             .build()
@@ -57,19 +55,19 @@ class JwtTokenProvider(
         return Keys.hmacShaKeyFor(secretKey.toByteArray())
     }
 
-    fun resolveToken(req: HttpServletRequest): String {
+    fun resolveToken(req: HttpServletRequest): String? {
         return req.getHeader("Authorization")
     }
 
-    fun validateToken(token: String): Boolean {
-        try {
+    fun validateToken(token: String?): Boolean {
+        return try {
             Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
-            return true
-        } catch (e: JwtException) {
-            throw e
+            true
+        } catch (e: Exception) {
+            false
         }
     }
 }
