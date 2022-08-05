@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://43.200.35.46:5432/test
+    username: phobyjun
+    password: p01080223
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+
+security:
+  jwt:
+    token:
+      secret-key: V1RCa2IyUnNiSFZpU0VaclZucFJPVmRVUW10aU1sSnpZa2hXYVZORlduSldibkJTVDFFOVBWa3daRzlrYkd4MVlraEdhMVo2VVRsWFZFSnJZakpTYzJKSVZtbFRSVnB5Vm01d1VrOVJQVDA9
+      validation-time: 3600000
