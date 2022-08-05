@@ -3,6 +3,7 @@ package io.dasom.meongdamgil.controller
 import io.dasom.meongdamgil.dto.account.AccountLoginResponseDto
 import io.dasom.meongdamgil.dto.account.AccountRequestDto
 import io.dasom.meongdamgil.dto.account.AccountResponseDto
+import io.dasom.meongdamgil.model.UserRole
 import io.dasom.meongdamgil.service.account.AccountService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -24,6 +25,21 @@ class AccountController(
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Email Already Exists.")
         }
         return ResponseEntity.ok(accountService.createAccount(accountReq))
+    }
+
+    @PostMapping("/account/admin/new")
+    fun newAdminAccount(
+        @RequestBody accountReq: AccountRequestDto
+    ): ResponseEntity<AccountResponseDto> {
+        val adminAccountReq = AccountRequestDto(
+            email = accountReq.email,
+            password = accountReq.password,
+            userRole = UserRole.ROLE_ADMIN
+        )
+        if (accountService.existsAccount(adminAccountReq.email)) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Email Already Exists.")
+        }
+        return ResponseEntity.ok(accountService.createAccount(adminAccountReq))
     }
 
     @PostMapping("/account/login")

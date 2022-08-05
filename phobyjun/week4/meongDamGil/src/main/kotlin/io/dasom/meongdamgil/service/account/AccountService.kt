@@ -39,7 +39,8 @@ class AccountService(
         val account = accountRepository.save(
             Account(
                 email = requestDto.email,
-                password = passwordEncoder.encode(requestDto.password)
+                password = passwordEncoder.encode(requestDto.password),
+                userRole = requestDto.userRole
             )
         )
         return AccountResponseDto(account)
