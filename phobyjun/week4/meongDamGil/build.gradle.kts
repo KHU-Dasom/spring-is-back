@@ -31,6 +31,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.kotest:kotest-runner-junit5-jvm:5.4.1")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("org.springdoc:springdoc-openapi-ui:1.5.9")
 
     compileOnly("org.projectlombok:lombok")
 
